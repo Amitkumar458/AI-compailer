@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "react-code-editor-main",
+			"path": "../.."
+		},
+		{
+			"name": "genai_poc2_frontend",
+			"path": "../../../../genai_poc2_frontend"
+		}
+	],
+	"settings": {}
+}
