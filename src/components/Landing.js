@@ -13,6 +13,12 @@ import LanguagesDropdown from "./LanguagesDropdown";
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
 
+
+const API_URL = process.env.REACT_APP_API_URL || "https://ai-compailer-1.onrender.com";
+const JUDGE0_API_URL = process.env.REACT_APP_JUDGE0_API_URL || "https://judge0-ce.p.rapidapi.com";
+const JUDGE0_API_KEY = process.env.REACT_APP_JUDGE0_API_KEY || "54e7d20655msha0e08888953cc48p1efe81jsn3ad41259c614";
+
+
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
 */
@@ -55,7 +61,7 @@ const Landing = () => {
   const handleRegenerate = async (error, code) => {
     setRegenerating(true);
     try {
-      const response = await axios.post("http://localhost:8000/regen/", {
+      const response = await axios.post(`${API_URL}/regen/`, {
         error,
         code,
         language: language.value,
@@ -96,7 +102,7 @@ const Landing = () => {
 
   const fetchBotResponse = async (userValue, lang, code, error) => {
     try {
-      const response = await axios.post("http://localhost:8000/chat/", {
+      const response = await axios.post(`${API_URL}/chat/`, {
         user: userValue,
         lang,
         code,
@@ -222,11 +228,10 @@ const Landing = () => {
     };
     const options = {
       method: "POST",
-      //url: process.env.REACT_APP_RAPID_API_URL,
-      url: "https://judge0-ce.p.rapidapi.com/submissions",
+      url: `${JUDGE0_API_URL}/submissions`,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
-        "x-rapidapi-key": "54e7d20655msha0e08888953cc48p1efe81jsn3ad41259c614",
+        "x-rapidapi-key": `${JUDGE0_API_KEY}`,
         "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
         "Content-Type": "application/json",
       },
